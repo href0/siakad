@@ -5,6 +5,14 @@
 
 		public $table ="tbl_siswa";
 
+	function login($username, $password)
+	{
+		$this->db->where('username', $username);
+		$this->db->where('password', md5($password));
+		$user = $this->db->get('tbl_siswa')->row_array();
+		return $user;
+	}
+
 		function save($foto)
 		{
 			$data = array(
@@ -88,5 +96,3 @@
 		}
 
 	}
-	
-?>
