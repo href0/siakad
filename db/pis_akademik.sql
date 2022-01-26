@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2022 at 09:57 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 8.0.8
+-- Generation Time: Jan 26, 2022 at 08:43 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,7 +57,9 @@ INSERT INTO `tabel_menu` (`id`, `nama_menu`, `link`, `icon`, `is_main_menu`) VAL
 (15, 'Menu', 'menu', 'fa fa-list', 0),
 (16, 'Form Pembayaran', 'pembayaran', 'fa fa-dollar', 0),
 (17, 'Nilai', 'nilai', 'fa fa-archive', 0),
-(19, 'Mapel Siswa', 'mapel_siswa', 'fa fa-book', 0);
+(19, 'Nilai Siswa', 'nilaisiswa', 'fa fa-book', 0),
+(20, 'Laporan Nilai', 'laporan_nilai', 'fa fa-file-pdf-o', 0),
+(21, 'Jadwal Siswa', 'jadwalsiswa', 'fa fa-calendar-plus-o', 0);
 
 -- --------------------------------------------------------
 
@@ -106,7 +108,11 @@ INSERT INTO `tbl_guru` (`id_guru`, `nuptk`, `nama_guru`, `gender`, `username`, `
 (0, '00000000000', 'Default', 'W', '', ''),
 (1, '00000000001', 'Fajri, S.Pd.I', 'P', 'fajri', 'e10adc3949ba59abbe56e057f20f883e'),
 (2, '00000000002', 'Teuku Tommy Yanuar Satria, S.Pd.I', 'P', 'tommy', 'e10adc3949ba59abbe56e057f20f883e'),
-(3, '00000000003', 'Mariyadi, A.Md', 'P', 'mariyadi', 'e10adc3949ba59abbe56e057f20f883e');
+(3, '00000000003', 'Mariyadi, A.Md', 'P', 'mariyadi', 'e10adc3949ba59abbe56e057f20f883e'),
+(4, '00000000004', 'Mulyadi S.pd', 'P', 'mulyadi', 'e10adc3949ba59abbe56e057f20f883e'),
+(6, '00000000005', 'Dwi Astuti S.pd', 'W', 'dwiastuti', 'e10adc3949ba59abbe56e057f20f883e'),
+(7, '00000000006', 'Mirana S,pd', 'W', 'mirana', 'e10adc3949ba59abbe56e057f20f883e'),
+(8, '00000000007', 'Rosary S,pd', 'W', 'rosary', 'e10adc3949ba59abbe56e057f20f883e');
 
 -- --------------------------------------------------------
 
@@ -133,17 +139,17 @@ CREATE TABLE `tbl_jadwal` (
 --
 
 INSERT INTO `tbl_jadwal` (`id_jadwal`, `id_tahun_akademik`, `semester`, `kd_jurusan`, `kd_tingkatan`, `kd_kelas`, `kd_mapel`, `id_guru`, `jam`, `kd_ruangan`, `hari`) VALUES
-(19, 6, 'ganjil', 'IPA', '10', '10-A1', 'BID1', 2, '10.45 - 11.30', '000', 'Jumat'),
+(19, 6, 'ganjil', 'IPA', '10', '10-A1', 'BID1', 0, '07.15 - 08.00', '000', 'Senin'),
 (20, 6, 'ganjil', 'IPA', '11', '11-A1', 'BID2', 0, '', '000', ''),
-(21, 6, 'ganjil', 'IPA', '12', '12-A1', 'BID3', 1, '', '000', ''),
-(22, 6, 'ganjil', 'IPA', '10', '10-A1', 'BIO1', 2, '', '000', ''),
+(21, 6, 'ganjil', 'IPA', '12', '12-A1', 'BID3', 1, '07.15 - 08.00', 'XII-IPA1', 'Senin'),
+(22, 6, 'ganjil', 'IPA', '10', '10-A1', 'BIO1', 0, '', '000', ''),
 (23, 6, 'ganjil', 'IPA', '11', '11-A1', 'BIO2', 0, '', '000', ''),
-(24, 6, 'ganjil', 'IPA', '12', '12-A1', 'BIO3', 0, '', '000', ''),
+(24, 6, 'ganjil', 'IPA', '12', '12-A1', 'BIO3', 4, '08.00 - 08.45', 'XII-IPA1', 'Sabtu'),
 (25, 6, 'ganjil', 'IPA', '10', '10-A1', 'BING1', 0, '', '000', ''),
 (26, 6, 'ganjil', 'IPA', '11', '11-A1', 'BING2', 0, '', '000', ''),
-(27, 6, 'ganjil', 'IPA', '12', '12-A1', 'BING3', 0, '', '000', ''),
+(27, 6, 'ganjil', 'IPA', '12', '12-A1', 'BING3', 6, '12.15 - 13.00', 'XI-IPS2', 'Rabu'),
 (28, 6, 'ganjil', 'IPA', '11', '11-A1', 'MTK2', 0, '', '000', ''),
-(29, 6, 'ganjil', 'IPA', '12', '12-A1', 'MTK3', 0, '', '000', ''),
+(29, 6, 'ganjil', 'IPA', '12', '12-A1', 'MTK3', 7, '10.00 - 10.45', 'XI-IPS3', 'Jumat'),
 (30, 6, 'ganjil', 'IPA', '10', '10-A1', 'MTK1', 0, '', '000', ''),
 (31, 6, 'ganjil', 'IPS', '10', '10-S1', 'BING1', 0, '', '000', ''),
 (32, 6, 'ganjil', 'IPS', '10', '10-S2', 'BING1', 0, '', '000', ''),
@@ -174,7 +180,7 @@ INSERT INTO `tbl_jadwal` (`id_jadwal`, `id_tahun_akademik`, `semester`, `kd_juru
 (57, 6, 'ganjil', 'IPS', '12', '12-S3', 'BID3', 0, '', '000', ''),
 (58, 6, 'ganjil', 'IPA', '10', '10-A1', 'KIM1', 0, '', '000', ''),
 (59, 6, 'ganjil', 'IPA', '11', '11-A1', 'KIM2', 0, '', '000', ''),
-(60, 6, 'ganjil', 'IPA', '12', '12-A1', 'KIM3', 0, '', '000', ''),
+(60, 6, 'ganjil', 'IPA', '12', '12-A1', 'KIM3', 8, '09.30 - 10.00', 'XII-IPS1', 'Senin'),
 (61, 6, 'ganjil', 'IPA', '10', '10-A1', 'FIS1', 0, '', '000', ''),
 (62, 6, 'ganjil', 'IPA', '11', '11-A1', 'FIS2', 0, '', '000', ''),
 (63, 6, 'ganjil', 'IPA', '12', '12-A1', 'FIS3', 0, '', '000', ''),
@@ -205,7 +211,7 @@ INSERT INTO `tbl_jadwal` (`id_jadwal`, `id_tahun_akademik`, `semester`, `kd_juru
 (88, 6, 'ganjil', 'IPS', '12', '12-S1', 'GEO3', 0, '', '000', ''),
 (89, 6, 'ganjil', 'IPS', '12', '12-S2', 'GEO3', 0, '', '000', ''),
 (90, 6, 'ganjil', 'IPS', '12', '12-S3', 'GEO3', 0, '', '000', ''),
-(91, 6, 'ganjil', 'IPA', '10', '10-A1', 'BID1', 0, '', '000', ''),
+(91, 6, 'ganjil', 'IPA', '10', '10-A1', 'BID1', 2, '09.30 - 10.00', 'X-IPA1', 'Jumat'),
 (92, 6, 'ganjil', 'IPA', '11', '11-A1', 'BID2', 0, '', '000', ''),
 (93, 6, 'ganjil', 'IPA', '12', '12-A1', 'BID3', 0, '', '000', ''),
 (94, 6, 'ganjil', 'IPA', '10', '10-A1', 'BIO1', 0, '', '000', ''),
@@ -215,7 +221,7 @@ INSERT INTO `tbl_jadwal` (`id_jadwal`, `id_tahun_akademik`, `semester`, `kd_juru
 (98, 6, 'ganjil', 'IPA', '11', '11-A1', 'BING2', 0, '', '000', ''),
 (99, 6, 'ganjil', 'IPA', '12', '12-A1', 'BING3', 0, '', '000', ''),
 (100, 6, 'ganjil', 'IPA', '11', '11-A1', 'MTK2', 0, '', '000', ''),
-(101, 6, 'ganjil', 'IPA', '12', '12-A1', 'MTK3', 0, '', '000', ''),
+(101, 6, 'ganjil', 'IPA', '12', '12-A1', 'MTK3', 0, '07.15 - 08.00', '000', 'Senin'),
 (102, 6, 'ganjil', 'IPA', '10', '10-A1', 'MTK1', 0, '', '000', ''),
 (103, 6, 'ganjil', 'IPS', '10', '10-S1', 'BING1', 0, '', '000', ''),
 (104, 6, 'ganjil', 'IPS', '10', '10-S2', 'BING1', 0, '', '000', ''),
@@ -249,7 +255,7 @@ INSERT INTO `tbl_jadwal` (`id_jadwal`, `id_tahun_akademik`, `semester`, `kd_juru
 (132, 6, 'ganjil', 'IPA', '12', '12-A1', 'KIM3', 0, '', '000', ''),
 (133, 6, 'ganjil', 'IPA', '10', '10-A1', 'FIS1', 0, '', '000', ''),
 (134, 6, 'ganjil', 'IPA', '11', '11-A1', 'FIS2', 0, '', '000', ''),
-(135, 6, 'ganjil', 'IPA', '12', '12-A1', 'FIS3', 0, '', '000', ''),
+(135, 6, 'ganjil', 'IPA', '12', '12-A1', 'FIS3', 2, '09.30 - 10.00', 'XII-IPA1', 'Rabu'),
 (136, 6, 'ganjil', 'IPS', '10', '10-S1', 'SOS1', 0, '', '000', ''),
 (137, 6, 'ganjil', 'IPS', '10', '10-S2', 'SOS1', 0, '', '000', ''),
 (138, 6, 'ganjil', 'IPS', '10', '10-S3', 'SOS1', 0, '', '000', ''),
@@ -499,7 +505,37 @@ INSERT INTO `tbl_nilai` (`id_nilai`, `id_jadwal`, `nim`, `nilai`) VALUES
 (5, 1, '18TI2000', 90),
 (6, 1, '18TI2001', 100),
 (7, 1, '18TI2002', 99),
-(8, 1, '18TI2003', 99);
+(8, 1, '18TI2003', 99),
+(9, 21, '099210312', 90),
+(10, 135, '099210312', 85),
+(12, 19, '01920121', 89),
+(13, 49, '01920121', 89),
+(14, 50, '01920121', 89),
+(15, 51, '01920121', 89),
+(16, 91, '01920121', 89),
+(17, 121, '01920121', 89),
+(18, 122, '01920121', 89),
+(19, 123, '01920121', 89),
+(20, 60, '099210312', 67),
+(21, 132, '099210312', 67),
+(22, 29, '099210312', 78),
+(23, 46, '099210312', 78),
+(24, 47, '099210312', 78),
+(25, 48, '099210312', 78),
+(26, 101, '099210312', 78),
+(27, 118, '099210312', 78),
+(28, 119, '099210312', 78),
+(29, 120, '099210312', 78),
+(30, 24, '099210312', 88),
+(31, 96, '099210312', 88),
+(32, 27, '099210312', 89),
+(33, 37, '099210312', 89),
+(34, 38, '099210312', 89),
+(35, 39, '099210312', 89),
+(36, 99, '099210312', 89),
+(37, 109, '099210312', 89),
+(38, 110, '099210312', 89),
+(39, 111, '099210312', 89);
 
 -- --------------------------------------------------------
 
@@ -529,7 +565,9 @@ INSERT INTO `tbl_riwayat_kelas` (`id_riwayat`, `kd_kelas`, `nim`, `id_tahun_akad
 (8, '7-A1', '18TI2003', 1),
 (9, '7-A1', '', 1),
 (10, '8-A1', '14.12.8199', 1),
-(11, '8-B1', '14.12.8198', 1);
+(11, '8-B1', '14.12.8198', 1),
+(12, '12-A1', '099210312', 6),
+(13, '10-A1', '01920121', 6);
 
 -- --------------------------------------------------------
 
@@ -568,6 +606,8 @@ INSERT INTO `tbl_ruangan` (`kd_ruangan`, `nama_ruangan`) VALUES
 --
 
 CREATE TABLE `tbl_siswa` (
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `nim` varchar(11) NOT NULL,
   `nama` varchar(40) NOT NULL,
   `gender` enum('L','P') NOT NULL,
@@ -582,15 +622,9 @@ CREATE TABLE `tbl_siswa` (
 -- Dumping data for table `tbl_siswa`
 --
 
-INSERT INTO `tbl_siswa` (`nim`, `nama`, `gender`, `tanggal_lahir`, `tempat_lahir`, `kd_agama`, `foto`, `kd_kelas`) VALUES
-('18SI1000', 'Muhammad Athallah Zuhry', 'L', '1996-12-19', 'Banda Aceh', 1, 'user-siluet.jpg', 'X-IPA'),
-('18SI1001', 'Rian Armansyah Maulana', 'L', '1996-01-02', 'Taliwang', 1, 'user-siluet1.jpg', 'X-IPA'),
-('18SI1002', 'Rezha Septyan Ramandha', 'L', '1997-01-24', 'Lampung', 1, 'user-siluet2.jpg', 'X-IPA'),
-('18SI1003', 'Ovillia Dyah Charisma', 'P', '1996-01-18', 'Semarang', 1, 'user-siluet3.jpg', '12-S2'),
-('18TI2000', 'Hadi Luthfi Firdaus', 'L', '1996-01-30', 'Pekanbaru', 1, 'user-siluet4.jpg', '11-S3'),
-('18TI2001', 'Muhammad Fajar', 'L', '1995-01-14', 'Yogyakarta', 1, 'user-siluet5.jpg', '12-A1'),
-('18TI2002', 'Bagus Widiatmono', 'L', '1996-01-09', 'Purworejo', 1, 'user-siluet6.jpg', '11-S2'),
-('18TI2003', 'Aris Harwanto', 'L', '1996-01-13', 'Klaten', 1, 'user-siluet7.jpg', '10-S3');
+INSERT INTO `tbl_siswa` (`username`, `password`, `nim`, `nama`, `gender`, `tanggal_lahir`, `tempat_lahir`, `kd_agama`, `foto`, `kd_kelas`) VALUES
+('rinaldi', 'e10adc3949ba59abbe56e057f20f883e', '01920121', 'Rinaldi', 'L', '2004-05-26', 'jakarta', 1, '', '10-A1'),
+('fendi', 'e10adc3949ba59abbe56e057f20f883e', '099210312', 'Fendi', 'L', '2005-07-19', 'Jambi', 1, '', '12-A1');
 
 -- --------------------------------------------------------
 
@@ -613,7 +647,7 @@ INSERT INTO `tbl_tahun_akademik` (`id_tahun_akademik`, `tahun_akademik`, `is_akt
 (1, '2018/2019', 'N', 'ganjil'),
 (2, '2017/2018', 'N', 'genap'),
 (5, '2019/2020', 'N', 'genap'),
-(6, '2021/2022', 'Y', '');
+(6, '2021/2022', 'Y', 'ganjil');
 
 -- --------------------------------------------------------
 
@@ -696,7 +730,9 @@ INSERT INTO `tbl_user_rule` (`id_rule`, `id_menu`, `id_level_user`) VALUES
 (19, 17, 3),
 (20, 18, 3),
 (21, 12, 3),
-(22, 19, 5);
+(22, 19, 5),
+(23, 20, 3),
+(24, 21, 5);
 
 -- --------------------------------------------------------
 
@@ -716,9 +752,9 @@ CREATE TABLE `tbl_walikelas` (
 --
 
 INSERT INTO `tbl_walikelas` (`id_walikelas`, `id_guru`, `id_tahun_akademik`, `kd_kelas`) VALUES
-(1, 1, 1, '7-A1'),
-(2, 0, 1, '7-A2'),
-(3, 0, 1, '7-B1'),
+(1, 1, 6, '12-A1'),
+(2, 2, 6, '10-A1'),
+(3, 3, 6, '11-A1'),
 (4, 0, 1, '7-B2'),
 (5, 0, 1, '8-A1'),
 (6, 0, 1, '8-A2'),
@@ -941,13 +977,13 @@ ALTER TABLE `tbl_walikelas`
 -- AUTO_INCREMENT for table `tabel_menu`
 --
 ALTER TABLE `tabel_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_guru`
 --
 ALTER TABLE `tbl_guru`
-  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_guru` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_jadwal`
@@ -977,13 +1013,13 @@ ALTER TABLE `tbl_level_user`
 -- AUTO_INCREMENT for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
-  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_riwayat_kelas`
 --
 ALTER TABLE `tbl_riwayat_kelas`
-  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_riwayat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_tahun_akademik`
@@ -1001,7 +1037,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_user_rule`
 --
 ALTER TABLE `tbl_user_rule`
-  MODIFY `id_rule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_rule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_walikelas`
